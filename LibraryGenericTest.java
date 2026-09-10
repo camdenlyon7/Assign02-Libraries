@@ -101,5 +101,30 @@ public class LibraryGenericTest {
 	// Student-supplied tests
 	// -------------------------------------------------------------------------
 
-	// TO DO: Add more unit tests HERE to completely and robustly check the LibraryGeneric class.
+	@Test
+	public void testGetListSortedByAuthor(){
+		java.util.List<LibraryBookGeneric<String>> sortedList = patronByNameLibrary.getListSortedByAuthor();
+		assertEquals("Baldacci", sortedList.get(0).getAuthorSurname());
+		assertEquals("Friedman", sortedList.get(1).getAuthorSurname());
+		assertEquals("Krakauer", sortedList.get(2).getAuthorSurname());
+	}
+
+	@Test
+	public void testGetOverdueList() {
+		patronByNameLibrary.checkOut(9780330351690L, "Jane Doe", 9, 1, 2026);
+		java.util.List<LibraryBookGeneric<String>> overdueList =patronByNameLibrary.getOverdueList(9, 10, 2026);
+		assertEquals(1, overdueList.size());
+		assertEquals(9780330351690L, overdueList.get(0).getIsbn());
+	}
+
+	@Test
+	public void testPhoneCheckOutAlreadyCheckedOut() {
+		PhoneNumber patron1 = new PhoneNumber("801.555.1234");
+		PhoneNumber patron2 = new PhoneNumber("801.555.9876");
+		patronByPhoneLibrary.checkOut(9780330351690L, patron1, 10, 1, 2026);
+		assertFalse(patronByPhoneLibrary.checkOut(9780330351690L, patron2, 10, 5, 2026));
+	}
 }
+		
+
+	
