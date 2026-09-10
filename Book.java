@@ -1,10 +1,10 @@
 package assign02;
 
 /**
- * Represents a book, in which the ISBN (unique), author, and title information 
+ * Represents a book, in which the ISBN (unique), author, and title information
  * cannot change once the book is created.
  * 
- * @author CS 2420 course staff and Camden Lyon and Ibrahim 
+ * @author CS 2420 course staff and Camden Lyon and Ibrahim
  * @version 2026-09-09
  */
 public class Book {
@@ -16,10 +16,10 @@ public class Book {
 	/**
 	 * Creates a book from the given ISBN, author, and title.
 	 * 
-	 * @param isbn - unique id for this book
-	 * @param authorSurname - last name for this book's author
+	 * @param isbn            - unique id for this book
+	 * @param authorSurname   - last name for this book's author
 	 * @param authorOtherName - rest of name for this book's author
-	 * @param title - title for this book
+	 * @param title           - title for this book
 	 */
 	public Book(long isbn, String authorSurname, String authorOtherName, String title) {
 		this.isbn = isbn;
@@ -29,18 +29,18 @@ public class Book {
 	}
 
 	/**
-	 * Gets the surname of this book's author.
-	 * (NOTE: Surname is the same as last name or family name.)
+	 * Gets the surname of this book's author. (NOTE: Surname is the same as last
+	 * name or family name.)
 	 * 
 	 * @return surname of this book's author
 	 */
 	public String getAuthorSurname() {
 		return this.authorSurname;
 	}
-	
+
 	/**
-	 * Gets the other name of this book's author.
-	 * (NOTE: Other name is a first or given name and optional middle name or initial.)
+	 * Gets the other name of this book's author. (NOTE: Other name is a first or
+	 * given name and optional middle name or initial.)
 	 * 
 	 * @return other name of this book's author
 	 */
@@ -65,7 +65,7 @@ public class Book {
 	public String getTitle() {
 		return this.title;
 	}
-	
+
 	/**
 	 * Generates a textual representation of this book.
 	 * 
@@ -76,19 +76,18 @@ public class Book {
 	}
 
 	/**
-	 * Determines whether this book is the same as a given object.
-	 * Two books are considered equal if they have the same ISBN, author, and
-	 * title information.
+	 * Determines whether this book is the same as a given object. Two books are
+	 * considered equal if they have the same ISBN, author, and title information.
 	 * 
 	 * @param other - object begin compared with this book
-	 * @return true if other is a Book type and is equal to this book,
-	 *         false otherwise
+	 * @return true if other is a Book type and is equal to this book, false
+	 *         otherwise
 	 */
 	public boolean equals(Object other) {
-		if(!(other instanceof Book))
+		if (!(other instanceof Book))
 			return false;
 		Book otherBook = (Book) other;
-		if (this.isbn == otherBook.isbn && this.authorSurname == otherBook.authorSurname 
+		if (this.isbn == otherBook.isbn && this.authorSurname == otherBook.authorSurname
 				&& this.authorOtherName == otherBook.authorOtherName && this.title == otherBook.title)
 			return true;
 		return false;

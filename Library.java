@@ -27,10 +27,10 @@ public class Library {
 	 * Adds the book, with the given ISBN, author, and title information, to this
 	 * library. Assumes there is no possibility of duplicate library books.
 	 * 
-	 * @param isbn - ISBN of the book to be added
-	 * @param authorSurname - surname of the author of the book to be added
+	 * @param isbn            - ISBN of the book to be added
+	 * @param authorSurname   - surname of the author of the book to be added
 	 * @param authorOtherName - other name of the author of the book to be added
-	 * @param title - title of the book to be added
+	 * @param title           - title of the book to be added
 	 */
 	public void add(long isbn, String authorSurname, String authorOtherName, String title) {
 		this.library.add(new LibraryBook(isbn, authorSurname, authorOtherName, title));
@@ -63,39 +63,37 @@ public class Library {
 		try (Scanner fileIn = new Scanner(new File(filename))) {
 			int lineNum = 1;
 
-			while(fileIn.hasNextLine()) {
+			while (fileIn.hasNextLine()) {
 				String line = fileIn.nextLine();
 
 				try (Scanner lineIn = new Scanner(line)) {
 					lineIn.useDelimiter("\\t");
 
-					if(!lineIn.hasNextLong())
+					if (!lineIn.hasNextLong())
 						throw new ParseException("ISBN", lineNum);
 					long isbn = lineIn.nextLong();
 
-					if(!lineIn.hasNext())
+					if (!lineIn.hasNext())
 						throw new ParseException("Author", lineNum);
 					String author = lineIn.next();
 					String[] authorNames = author.split(", ");
-					if(authorNames.length != 2)
+					if (authorNames.length != 2)
 						throw new ParseException("Author", lineNum);
 
-					if(!lineIn.hasNext())
+					if (!lineIn.hasNext())
 						throw new ParseException("Title", lineNum);
 					String title = lineIn.next();
 
 					toBeAdded.add(new LibraryBook(isbn, authorNames[0], authorNames[1], title));
 
 					lineNum++;
-				}
-				catch (ParseException e) {
+				} catch (ParseException e) {
 					System.err.println(e.getLocalizedMessage() + " formatted incorrectly at line " + e.getErrorOffset()
 							+ ". Nothing added to the library.");
 					return;
 				}
 			}
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage() + " Nothing added to the library.");
 			return;
 		}
@@ -112,8 +110,8 @@ public class Library {
 	 * @param isbn - ISBN of the book to be looked up
 	 */
 	public int lookup(long isbn) {
-		for (int i=0; i < this.library.size(); i++)
-			if (this.library.get(i).getIsbn() == isbn){
+		for (int i = 0; i < this.library.size(); i++)
+			if (this.library.get(i).getIsbn() == isbn) {
 				return this.library.get(i).getPatron();
 			}
 		return -1;
@@ -129,8 +127,8 @@ public class Library {
 	 */
 	public ArrayList<LibraryBook> lookup(int patron) {
 		ArrayList<LibraryBook> checkedOut = new ArrayList<LibraryBook>();
-		for (int i=0; i < this.library.size(); i++)
-			if (this.library.get(i).getPatron() == patron){
+		for (int i = 0; i < this.library.size(); i++)
+			if (this.library.get(i).getPatron() == patron) {
 				checkedOut.add(this.library.get(i));
 			}
 		return checkedOut;
@@ -142,16 +140,16 @@ public class Library {
 	 * returns false. If the book with the specified ISBN is already checked out,
 	 * returns false. Otherwise, returns true.
 	 * 
-	 * @param isbn - ISBN of the library book to be checked out
+	 * @param isbn   - ISBN of the library book to be checked out
 	 * @param patron - id of the patron who checking this book out of the library
-	 * @param month - month (as number) when this book is due to be returned to
-	 *                the library
-	 * @param day - day when this book is due to be returned to the library
-	 * @param year - year when this book is due to be returned to the library
+	 * @param month  - month (as number) when this book is due to be returned to the
+	 *               library
+	 * @param day    - day when this book is due to be returned to the library
+	 * @param year   - year when this book is due to be returned to the library
 	 */
 	public boolean checkOut(long isbn, int patron, int month, int day, int year) {
-		for (int i=0; i < this.library.size(); i++) {
-			if (this.library.get(i).getIsbn() == isbn){
+		for (int i = 0; i < this.library.size(); i++) {
+			if (this.library.get(i).getIsbn() == isbn) {
 				if (this.library.get(i).getPatron() == -1) {
 					this.library.get(i).checkOut(patron, month, day, year);
 					return true;
@@ -174,8 +172,8 @@ public class Library {
 	 * @param isbn - ISBN of the book to be given back to the library
 	 */
 	public boolean checkIn(long isbn) {
-		for (int i=0; i < this.library.size(); i++) {
-			if (this.library.get(i).getIsbn() == isbn){
+		for (int i = 0; i < this.library.size(); i++) {
+			if (this.library.get(i).getIsbn() == isbn) {
 				if (this.library.get(i).getPatron() != -1) {
 					this.library.get(i).returnBook();
 					return true;
@@ -198,13 +196,13 @@ public class Library {
 	 */
 	public boolean checkIn(int patron) {
 		boolean patronFound = false;
-		for (int i=0; i < this.library.size(); i++) {
-			if (this.library.get(i).getPatron() == patron){
-					this.library.get(i).returnBook();
-					patronFound = true;
+		for (int i = 0; i < this.library.size(); i++) {
+			if (this.library.get(i).getPatron() == patron) {
+				this.library.get(i).returnBook();
+				patronFound = true;
 			}
 		}
 		return patronFound;
 	}
-	
+
 }
