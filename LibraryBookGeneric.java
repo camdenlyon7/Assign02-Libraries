@@ -6,7 +6,8 @@ import java.util.GregorianCalendar;
  * A subclass of Book with two additional instance variables patron, a generic
  * variable, and dueDate, a GregorianCalendar. LibraryBooks can be checked in or
  * out
- * 
+ * @author CS 2420 course staff and Camden Lyon and Ibrahim Alasady
+ * @version 2026-09-10
  */
 public class LibraryBookGeneric<T> extends Book {
 
