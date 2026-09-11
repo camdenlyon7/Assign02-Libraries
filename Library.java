@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Represents a library, which is a collection of library books.
  * 
- * @author CS 2420 course staff and Camden Lyon & Ibrahim
+ * @author CS 2420 course staff and Camden Lyon & Ibrahim Alasady
  * @version 2026-09-09
  */
 public class Library {
