@@ -9,9 +9,10 @@ import java.util.ArrayList;
 
 /**
  * For testing the Library class.
- * 
- * @author CS 2420 course staff and ***PROGRAMMING PAIR: FILL IN YOUR NAMES*** 
- * @version ***FILL IN THE DATE***
+ *
+ * A Library class with a generic patron type
+ * @author CS 2420 course staff and Camden Lyon and Ibrahim Alasady
+ * @version 2026-09-10
  */
 public class LibraryTest {
 	private Library emptyLibrary, tinyLibrary, smallLibrary;
