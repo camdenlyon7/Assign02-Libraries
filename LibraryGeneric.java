@@ -6,6 +6,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A Library class with a generic patron type
+ * @author CS 2420 course staff and Camden Lyon and Ibrahim Alasady
+ * @version 2026-09-10
+ */
 public class LibraryGeneric<T> {
 	private ArrayList<LibraryBookGeneric<T>> library;
 
