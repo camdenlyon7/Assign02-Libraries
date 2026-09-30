@@ -204,4 +204,19 @@ public class LibraryGeneric<T> {
 		return patronFound;
 	}
 
+	public ArrayList<LibraryBookGeneric<T>> getOverdueList(int month, int day, int year) {
+		GregorianCalendar targetDate = new GregorianCalendar(year, month, day);
+		ArrayList<LibraryBookGeneric<T>> overdueList = new ArrayList<LibraryBookGeneric<T>>();
+
+		for (int i = 0; i < this.library.size(); i++) {
+			LibraryBookGeneric<T> book = this.library.get(i);
+			if (book.getDueDate() != null && book.getDueDate().compareTo(targetDate) < 0) {
+				overdueList.add(book);
+			}
+		}
+		OrderByDueDate<T> comparator = new OrderByDueDate<T>();
+		sort(overdueList, comparator);
+		return overdueList;
+	}
+
 }
