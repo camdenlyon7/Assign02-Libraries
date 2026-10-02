@@ -205,7 +205,7 @@ public class LibraryGeneric<T> {
 	}
 
 	public ArrayList<LibraryBookGeneric<T>> getOverdueList(int month, int day, int year) {
-		GregorianCalendar targetDate = new GregorianCalendar(year, month, day);
+		GregorianCalendar targetDate = new GregorianCalendar(year, month - 1, day);
 		ArrayList<LibraryBookGeneric<T>> overdueList = new ArrayList<LibraryBookGeneric<T>>();
 
 		for (int i = 0; i < this.library.size(); i++) {
