@@ -126,7 +126,42 @@ public class LibraryGenericTest {
 		patronByPhoneLibrary.checkOut(9780330351690L, patron1, 10, 1, 2026);
 		assertFalse(patronByPhoneLibrary.checkOut(9780330351690L, patron2, 10, 5, 2026));
 	}
+
+	@Test
+	public void testGetOverdueList() {
+    	LibraryGeneric<String> lib = new LibraryGeneric<String>();
+    
+    // Add books to the library
+    lib.add(9780374602604L, "Sanderson", "Brandon", "Mistborn");
+    lib.add(9780345391803L, "Adams", "Douglas", "The Hitchhiker's Guide to the Galaxy");
+    lib.add(9780451450524L, "Herbert", "Frank", "Dune");
+    lib.add(9780060850524L, "Gaiman", "Neil", "American Gods");
+
+    // Check out books with different due dates
+    // Due Sept 1, 2026 (Overdue relative to Oct 1, 2026)
+    lib.checkOut(9780374602604L, "PatronA", 9, 1, 2026); 
+    
+    // Due Sept 15, 2026 (Overdue relative to Oct 1, 2026)
+    lib.checkOut(9780345391803L, "PatronB", 9, 15, 2026); 
+    
+    // Due Oct 15, 2026 (NOT overdue relative to Oct 1, 2026)
+    lib.checkOut(9780451450524L, "PatronC", 10, 15, 2026); 
+    
+    // Last book remains checked in (NOT overdue)
+
+    // Query overdue books as of Oct 1, 2026
+    ArrayList<LibraryBookGeneric<String>> overdue = lib.getOverdueList(10, 1, 2026);
+
+    // Verify correct number of overdue books returned
+    assertEquals(2, overdue.size());
+
+    // Verify books are sorted in ascending order by due date
+    assertEquals(9780374602604L, overdue.get(0).getIsbn()); // Due Sept 1
+    assertEquals(9780345391803L, overdue.get(1).getIsbn()); // Due Sept 15
+	}
 }
+		
+
 		
 
 	
